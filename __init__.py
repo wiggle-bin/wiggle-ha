@@ -8,7 +8,7 @@ from homeassistant.const import Platform
 from .const import DOMAIN
 from .coordinator import WiggleBinDataUpdateCoordinator
 
-from .api import WiggleBinUploadView
+from .api import WiggleBinUploadView  # or wherever you placed the class
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -26,6 +26,7 @@ async def async_setup_entry(
 
     hass.data[DOMAIN][entry.entry_id] = coordinator
 
+    # Register upload endpoint
     hass.http.register_view(WiggleBinUploadView)
 
     # Forward the setup to the sensor platform.

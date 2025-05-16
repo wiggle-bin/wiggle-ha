@@ -1,6 +1,7 @@
 """Platform for sensor integration."""
 
 import logging
+from typing import Any
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
@@ -79,6 +80,15 @@ async def async_setup_entry(
         ),
         WiggleBinSensor(
             coordinator,
+            f"{entry.entry_id}_soil_adc",
+            f"{entry.title} Soil ADC",
+            "soil_moisture",
+            "adc",
+            None,
+            None,
+        ),
+        WiggleBinSensor(
+            coordinator,
             f"{entry.entry_id}_image_mean_gray",
             f"{entry.title} Image Mean Gray",
             "image",
@@ -100,7 +110,7 @@ async def async_setup_entry(
             f"{entry.entry_id}_image_pixels_lighter",
             f"{entry.title} Image Pixels Shifted To Light",
             "image",
-            "count_pixels_lighter",
+            "count_pixels_darker",
             None,
             None,
         ),
@@ -109,7 +119,7 @@ async def async_setup_entry(
             f"{entry.entry_id}_worm_count",
             f"{entry.title} Worm Count",
             "image",
-            "worm_count",
+            "detection_class_worm_count",
             None,
             None,
         ),
@@ -128,6 +138,33 @@ async def async_setup_entry(
             f"{entry.title} Fly Larva Count",
             "image",
             "detection_class_fly_larva_count",
+            None,
+            None,
+        ),
+        WiggleBinSensor(
+            coordinator,
+            f"{entry.entry_id}_detection_confidence_avg",
+            f"{entry.title} Detection Confidence Average",
+            "image",
+            "detection_confidence_avg",
+            None,
+            None,
+        ),
+        WiggleBinSensor(
+            coordinator,
+            f"{entry.entry_id}_detection_confidence_min",
+            f"{entry.title} Detection Confidence Min",
+            "image",
+            "detection_confidence_min",
+            None,
+            None,
+        ),
+        WiggleBinSensor(
+            coordinator,
+            f"{entry.entry_id}_detection_confidence_max",
+            f"{entry.title} Detection Confidence Max",
+            "image",
+            "detection_confidence_max",
             None,
             None,
         ),
